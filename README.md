@@ -15,10 +15,10 @@
 #### Get your (confidential) token
 - In the Twitch Developer Applications Console, next to your newly created application click *Manage*, and copy its Client ID.
 - Look at this link (DON'T CLICK YET!!!) https://id.twitch.tv/oauth2/authorize?client_id=CLIENTID&redirect_uri=https://localhost&response_type=token&scope=chat:read
-- Copy the link to URL bar, and in *CLIENTID* paste your Client Id you got in your Twitch Application.<br>*Should look along the lines of <br>id.twitch.tv/oauth2/authorize?client_id=verylongstringsthatisaclientid&redirect_uri=https://localhost&response_type=token&scope=chat:read*
+- Copy the link to URL bar, and in *CLIENTID* paste your Client Id you got in your Twitch Application.<br>*Should look along the lines of <br>https://id.twitch.tv/oauth2/authorize?client_id=verylongstringsthatisaclientid&redirect_uri=https://localhost&response_type=token&scope=chat:read*
 - Press *Enter*, it *should* redirect you to a Twitch page where you can authorize your application to read your chat (Click Authorize to authorize).
 - It should bring you to a broken page. **IT'S NORMAL!** *chill out!*
-- You should have get redirected to a URL that looks like the following:<br>localhost/#access_token=superlongstringthatisatokenwow&scope=chat%3Aread&token_type=bearer
+- You should have get redirected to a URL that looks like the following:<br>localhost/#access_token=**superlongstringthatisatokenwow**&scope=chat%3Aread&token_type=bearer
 - If you look closely, you should see your token that is taking about 1/3rd of the link. Copy it.
 - Congrats, you achieved that hardest part.
 
