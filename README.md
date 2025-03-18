@@ -1,4 +1,4 @@
-
+# WIP!
 
 ### How to make a Twitch Application, in order to use its API
 
@@ -41,3 +41,10 @@
 
 ### Congrats
 You now have a wheel in OBS, linked to your Twitch chat.
+
+### Commands
+| Command | Description                | Permissions                  |
+|---------|----------------------------|------------------------------|
+| !enter  | People enter the wheel     | Any Chatter. One entry only! |
+| !spin   | Spin the wheel!            | Broadcaster                  |
+| !clear  | Clear the wheel (/entries) | Broadcaster                  |
