@@ -23,7 +23,7 @@
 - Congrats, you achieved that hardest part.
 
 #### Download & Prepare the page
-- Get in *Releases*
+- Get in [*Releases*](https://github.com/MeblIkea/WheelOfNamesTwitchObsIntegration/releases)
 - Download the .zip
 - Extract it somewhere easy to find
 - **Setup info.json**:<br>*I know JSON is terrible for storing tokens, but can't think of another solution OBS Browser friendly (see comments of app.js)*
