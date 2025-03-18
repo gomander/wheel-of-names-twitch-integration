@@ -7,7 +7,7 @@
 #### Create a new application
 - Click **[+ Register Your Application](https://dev.twitch.tv/console/apps/create)**
 - Input a name for your application (such as "Wheel of Name integration", it doesn't really matter).
-- **In OAuth Redirect URLs, you want to set a local https://localhost**, it's where you will be redirected when creating token, you want to keep your token private.
+- **In OAuth Redirect URLs, you want to set "https://localhost"**, it's where you will be redirected when creating token, you want to keep your token private.
 - Category: Application Integration
 - Client Type: Confidential (because you are not supposed to share your access).
 - **CREATE!!!**
