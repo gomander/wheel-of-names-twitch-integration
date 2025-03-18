@@ -26,7 +26,7 @@
 - Get in *Releases*
 - Download the .zip
 - Extract it somewhere easy to find
-- **Setup info.json**:
+- **Setup info.json**:<br>*I know JSON is terrible for storing tokens, but can't think of another solution OBS Browser friendly (see comments of app.js)*
 - - Token: Put the token you generated above.
 - - Username: Set your channel username (with which you made the Twitch Dev Application).
 - - Channel: The channel you want to link the wheel to (only the broadcaster can use commands on the wheel).
