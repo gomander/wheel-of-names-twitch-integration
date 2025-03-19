@@ -1,7 +1,0 @@
-#wOnFrame { /* We want the wheel to take the entire space (top and left cancel margins) */
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-}
