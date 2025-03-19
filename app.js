@@ -5,6 +5,13 @@ const ACCESS_TOKEN = '';
 const CLIENT_ID = '';
 const BROADCASTER = '';
 
+const COMMAND_PREFIX = '!';
+const CLEAR_COMMAND = COMMAND_PREFIX + 'clear';
+const CLOSE_WINNER_COMMAND = COMMAND_PREFIX + 'closewinner';
+const REMOVE_WINNER_COMMAND = COMMAND_PREFIX + 'removewinner';
+const SPIN_COMMAND = COMMAND_PREFIX + 'spin';
+const ENTER_COMMAND = COMMAND_PREFIX + 'enter';
+
 const iframe = document.querySelector('iframe');
 
 /** @type {string[]} */
@@ -71,11 +78,18 @@ socket.onmessage = async (event) => {
   }
 };
 
+addEventListener('message', (event) => {
+  if (event.origin !== 'https://wheelofnames.com') return;
+  if (event.data.spinResult?.text) {
+    console.log('Winner:', event.data.spinResult.text);
+  }
+});
+
 /** @type {(username: string, message: string) => void} */
 function evaluateMessage(username, message) {
   const standMessage = message.trim().toLowerCase();
 
-  if (standMessage === '!enter' && !entries.includes(username)) {
+  if (standMessage === ENTER_COMMAND && !entries.includes(username)) {
     entries.push(username);
     setEntries();
     console.log(username + ' entered the wheel!');
@@ -84,21 +98,30 @@ function evaluateMessage(username, message) {
 
   if (username.toLowerCase() === BROADCASTER.toLowerCase()) {
     switch (standMessage) {
-      case '!clear':
+      case CLEAR_COMMAND:
         console.log('Clearing the wheel!');
         entries.length = 0;
         setEntries();
         break;
-      case '!spin':
-        console.log('Spinning the wheel!');
-        spin();
+      case CLOSE_WINNER_COMMAND:
+        console.log('Closing the winner dialog!');
+        closeWinnerDialog();
         break;
-      case '!removewinner':
+      case REMOVE_WINNER_COMMAND:
         console.log('Removing the winner!');
         removeWinner();
         break;
+      case SPIN_COMMAND:
+        console.log('Spinning the wheel!');
+        spin();
+        break;
     }
   }
+}
+
+function closeWinnerDialog() {
+  iframe?.contentWindow?.postMessage({ name: 'closeWinnerDialog' }, '*');
+}
 
 function removeWinner() {
   iframe?.contentWindow?.postMessage({ name: 'removeWinner' }, '*');
