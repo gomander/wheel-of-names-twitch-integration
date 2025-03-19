@@ -4,6 +4,8 @@
 
 Big thanks to [MeblIkea](https://github.com/MeblIkea/WheelOfNamesTwitchObsIntegration) for creating the initial working prototype. This would not have been possible without them.
 
+While Wheel of Names is still working on the APIs for interacting with the client website programmatically, this integration may target the unstable `test.wheelofnames.com`. Do not expect it to work flawlessly (or at all) until it has moved to target `wheelofnames.com`.
+
 ## Getting set up
 
 ### Create a Twitch Application
@@ -26,8 +28,7 @@ Big thanks to [MeblIkea](https://github.com/MeblIkea/WheelOfNamesTwitchObsIntegr
 - Congrats, you've achieved that hardest part.
 
 ### Download & Prepare the page
-- Go to this repository's [*Releases*](https://github.com/gomander/wheel-of-names-twitch-integration/releases)
-- Download the `.zip` file.
+- Download the ZIP containing the code in this repository from the green `Code` dropdown at the top of the page.
 - Extract it somewhere easy to find.
 - Enter your information into the top of `app.js`:
   - Set the access token you generated above as the value for `ACCESS_TOKEN`.
