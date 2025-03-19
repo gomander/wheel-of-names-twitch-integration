@@ -75,6 +75,5 @@ function evaluateMessage(username, message) {
 
 // Update the wheel with every name (until it can add names one by one via JavaScript)
 function updateWheel() {
-    let allEntries = entries.join(',');
-    document.getElementById('wOnFrame').src = 'https://wheelofnames.com/view?entries='+allEntries+'&pageBackgroundColor=00000000';
+    document.getElementById('wOnFrame').src = 'https://wheelofnames.com/view?entries='+entries.join(',')+'&pageBackgroundColor=00000000';
 }
