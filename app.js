@@ -3,14 +3,14 @@
 // IMPORTANT: Your token must be kept secret. DO NOT SHOW IT TO ANYONE or commit it to a public repository, or your Twitch account can get BANNED.
 const ACCESS_TOKEN = '';
 const CLIENT_ID = '';
-const BROADCASTER_CHANNEL = '';
+const BROADCASTER = '';
 
 const iframe = document.querySelector('iframe');
 
 /** @type {string[]} */
 const entries = [];
 
-const socket = new WebSocket('wss://eventsub.wss.twitch.tv/ws?keepalive_timeout_seconds=600');
+let socket = new WebSocket('wss://eventsub.wss.twitch.tv/ws?keepalive_timeout_seconds=600');
 
 /** @type {typeof WebSocket.prototype.onopen} */
 socket.onopen = () => {
@@ -36,18 +36,25 @@ socket.onmessage = async (event) => {
     switch (data.metadata.message_type) {
       case 'session_welcome':
         const broadcasterId = await getBroadcasterId();
-        await subscribeToChannelMessages(data.payload.session.id, broadcasterId);
+        await subscribeToChannelMessages(
+          data.payload.session.id,
+          broadcasterId
+        );
         break;
       case 'session_keepalive':
         console.log('Received keepalive message');
         break;
       case 'session_reconnect':
         console.log('Received reconnect message');
-        // TODO: Connect to the new URL
+        socket.close();
+        socket = new WebSocket(data.payload.session.reconnect_uri);
         break;
       case 'revocation':
-        console.error('Revocation message received:', data.payload);
-        break;
+        throw new Error(
+          `Revocation message received: ${
+            data.payload.subscription.type
+          } ${data.payload.subscription.status}`
+        );
       case 'notification':
         if (data.payload.subscription.type === 'channel.chat.message') {
           evaluateMessage(
@@ -75,7 +82,7 @@ function evaluateMessage(username, message) {
     return;
   }
 
-  if (username.toLowerCase() === BROADCASTER_CHANNEL.toLowerCase()) {
+  if (username.toLowerCase() === BROADCASTER.toLowerCase()) {
     switch (standMessage) {
       case '!clear':
         console.log('Clearing the wheel!');
@@ -92,6 +99,9 @@ function evaluateMessage(username, message) {
         break;
     }
   }
+
+function removeWinner() {
+  iframe?.contentWindow?.postMessage({ name: 'removeWinner' }, '*');
 }
 
 function setEntries() {
@@ -101,10 +111,6 @@ function setEntries() {
   }, '*');
 }
 
-function removeWinner() {
-  iframe?.contentWindow?.postMessage({ name: 'removeWinner' }, '*');
-}
-
 function spin() {
   iframe?.contentWindow?.postMessage({ name: 'spin' }, '*');
 }
@@ -112,7 +118,7 @@ function spin() {
 /** @type {() => Promise<string>} */
 async function getBroadcasterId() {
   const response = await fetch(
-    `https://api.twitch.tv/helix/users?login=${BROADCASTER_CHANNEL}`,
+    `https://api.twitch.tv/helix/users?login=${BROADCASTER}`,
     {
       headers: {
         'Client-Id': CLIENT_ID,
