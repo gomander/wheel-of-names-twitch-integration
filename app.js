@@ -41,13 +41,14 @@ socket.onmessage = async (event) => {
     const data = JSON.parse(event.data);
 
     switch (data.metadata.message_type) {
-      case 'session_welcome':
+      case 'session_welcome': {
         const broadcasterId = await getBroadcasterId();
         await subscribeToChannelMessages(
           data.payload.session.id,
           broadcasterId
         );
         break;
+      }
       case 'session_keepalive':
         console.log('Received keepalive message');
         break;
@@ -92,7 +93,7 @@ function evaluateMessage(username, message) {
   if (standMessage === ENTER_COMMAND && !entries.includes(username)) {
     entries.push(username);
     setEntries();
-    console.log(username + ' entered the wheel!');
+    console.log(`${username} entered the wheel!`);
     return;
   }
 
